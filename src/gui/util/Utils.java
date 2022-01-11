@@ -33,6 +33,14 @@ public class Utils {
 			return null;
 		}
 	}
+	
+	public static Double converterParaDouble(String str) {
+		try {
+			return Double.parseDouble(str);
+		} catch (NumberFormatException e) {
+			return null;
+		}
+	}
 
 	public static <T> void formatarDataDaColuna(TableColumn<T, Date> tableColumn, String format) {
 		tableColumn.setCellFactory(column -> {
