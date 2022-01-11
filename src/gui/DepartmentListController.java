@@ -58,7 +58,7 @@ public class DepartmentListController implements Initializable, DataChangeListen
 	
 	@FXML
 	public void onBtNewAction(ActionEvent event) {
-		Stage parentStage = Utils.currentStage(event);
+		Stage parentStage = Utils.palcoAtual(event);
 		Department obj = new Department();
 		criarFormulario(obj, "/gui/DepartmentForm.fxml", parentStage);
 	}
@@ -152,7 +152,7 @@ public class DepartmentListController implements Initializable, DataChangeListen
 				
 				setGraphic(button);
 				button.setOnAction(
-					event -> criarFormulario(obj, "/gui/DepartmentForm.fxml", Utils.currentStage(event))
+					event -> criarFormulario(obj, "/gui/DepartmentForm.fxml", Utils.palcoAtual(event))
 				);
 			}
 		});

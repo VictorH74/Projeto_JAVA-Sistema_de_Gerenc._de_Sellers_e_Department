@@ -1,6 +1,7 @@
 package gui;
 
 import java.net.URL;
+import java.util.Date;
 import java.util.List;
 import java.util.Optional;
 import java.util.ResourceBundle;
@@ -44,6 +45,15 @@ public class SellerListController implements Initializable, DataChangeListener{
 	private TableColumn<Seller, String> tableColumnName;
 	
 	@FXML
+	private TableColumn<Seller, String> tableColumnEmail;
+	
+	@FXML
+	private TableColumn<Seller, Date> tableColumnBirthDate;
+	
+	@FXML
+	private TableColumn<Seller, Double> tableColumnBaseSalary;
+	
+	@FXML
 	private TableColumn<Seller, Seller> tableColumnEDIT;
 	
 	@FXML
@@ -53,7 +63,7 @@ public class SellerListController implements Initializable, DataChangeListener{
 	
 	@FXML
 	public void onBtNewAction(ActionEvent event) {
-		Stage parentStage = Utils.currentStage(event);
+		Stage parentStage = Utils.palcoAtual(event);
 		Seller obj = new Seller();
 		criarFormulario(obj, "/gui/SellerForm.fxml", parentStage);
 	}
@@ -71,6 +81,13 @@ public class SellerListController implements Initializable, DataChangeListener{
 	private void initializeNodes() {
 		tableColumnId.setCellValueFactory(new PropertyValueFactory<>("id"));
 		tableColumnName.setCellValueFactory(new PropertyValueFactory<>("name"));
+		tableColumnEmail.setCellValueFactory(new PropertyValueFactory<>("email"));
+		
+		tableColumnBirthDate.setCellValueFactory(new PropertyValueFactory<>("birthDate"));
+		Utils.formatarDataDaColuna(tableColumnBirthDate, "dd/MM/yyyy");
+		
+		tableColumnBaseSalary.setCellValueFactory(new PropertyValueFactory<>("baseSalary"));
+		Utils.formatarValorDoubleDaColuna(tableColumnBaseSalary, 2);
 		
 		// Macete para fazer a TableView acompanhar a altura da janela
 		Stage stage = (Stage) Main.getMainScene().getWindow();
@@ -147,7 +164,7 @@ public class SellerListController implements Initializable, DataChangeListener{
 				
 				setGraphic(button);
 				button.setOnAction(
-					event -> criarFormulario(obj, "/gui/SellerForm.fxml", Utils.currentStage(event))
+					event -> criarFormulario(obj, "/gui/SellerForm.fxml", Utils.palcoAtual(event))
 				);
 			}
 		});

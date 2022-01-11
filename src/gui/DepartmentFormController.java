@@ -74,7 +74,7 @@ public class DepartmentFormController implements Initializable{
 			
 			// para fechar a janela
 			// pegar referencia para a janela atual
-			Utils.currentStage(event).close();
+			Utils.palcoAtual(event).close();
 		}catch(ValidationException e) {
 			setErrorMessages(e.getErrors());
 		}catch(DbException e) {
@@ -94,7 +94,7 @@ public class DepartmentFormController implements Initializable{
 		//Exceção que será lançada quando ocorrer erro citado na verificação
 		ValidationException exception = new ValidationException("Validation error");
 		
-		obj.setId(Utils.tryParseToInt(txtId.getText()));
+		obj.setId(Utils.converterParaInt(txtId.getText()));
 		
 		//obj a ser verificado "txtName"
 		if(txtName.getText() == null || txtName.getText().trim().equals(""))
@@ -112,7 +112,7 @@ public class DepartmentFormController implements Initializable{
 
 	@FXML
 	public void onBtCancelAction(ActionEvent event) {
-		Utils.currentStage(event).close();
+		Utils.palcoAtual(event).close();
 	}
 
 	@Override
