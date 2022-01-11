@@ -148,7 +148,8 @@ public class SellerDaoJDBC implements SellerDao {
 		obj.setName(rs.getString("Name"));
 		obj.setEmail(rs.getString("Email"));
 		obj.setBaseSalary(rs.getDouble("BaseSalary"));
-		obj.setBirthDate(rs.getDate("BirthDate"));
+		//obj.setBirthDate(rs.getDate("BirthDate")); -> irá instanciar o "java.sql.Date"
+		obj.setBirthDate(new java.util.Date(rs.getTimestamp("BirthDate").getTime()));
 		obj.setDepartment(dep);
 
 		return obj;
@@ -173,8 +174,8 @@ public class SellerDaoJDBC implements SellerDao {
 
 			while (rs.next()) {
 				Department dep = instanteateDepartment(rs);
-				list.add(new Seller(rs.getInt("Id"), rs.getString("Name"), rs.getString("Email"),
-						rs.getDate("BirthDate"), rs.getDouble("BaseSalary"), dep));
+				Seller obj = instanteateSeller(rs, dep);
+				list.add(obj);
 			}
 		} catch (SQLException e) {
 			throw new DbException(e.getMessage());
